@@ -2,45 +2,45 @@ import React from 'react';
 import { expect } from 'chai';
 import { spy } from 'sinon';
 import { shallow, mount } from 'enzyme';
-import { BeerListContainer } from './components';
-import { InputArea, BeerList } from './components';
+import { ItemListContainer } from './components';
+import { InputArea, ItemList } from './components';
 
-describe('BeerListContainer', () => {
-  it('should render InputArea and BeerList', () => {
-    const wrapper = shallow(<BeerListContainer/>);
+describe('ItemListContainer', () => {
+  it('should render InputArea and ItemList', () => {
+    const wrapper = shallow(<ItemListContainer/>);
     expect(wrapper.containsAllMatchingElements([
       <InputArea/>,
-      <BeerList/>
+      <ItemList/>
     ])).to.equal(true);
   });
 
   it('should start with an empty list', () => {
-    const wrapper = shallow(<BeerListContainer/>);
-    expect(wrapper.state('beers')).to.eql([]);
+    const wrapper = shallow(<ItemListContainer/>);
+    expect(wrapper.state('items')).to.eql([]);
   });
 
   it('adds items to the list', () => {
-    const wrapper = shallow(<BeerListContainer/>);
+    const wrapper = shallow(<ItemListContainer/>);
     wrapper.instance().addItem('Sam Adams');
-    expect(wrapper.state('beers')).to.eql(['Sam Adams']);
+    expect(wrapper.state('items')).to.eql(['Sam Adams']);
   });
 
   it('passes addItem to InputArea', () => {
-    const wrapper = shallow(<BeerListContainer/>);
+    const wrapper = shallow(<ItemListContainer/>);
     const inputArea = wrapper.find(InputArea);
     const addItem = wrapper.instance().addItem;
     expect(inputArea.prop('onSubmit')).to.eql(addItem);
   });
 
   it('passes a bound addItem function to InputArea', () => {
-    const wrapper = shallow(<BeerListContainer/>);
+    const wrapper = shallow(<ItemListContainer/>);
     const inputArea = wrapper.find(InputArea);
     inputArea.prop('onSubmit')('Sam Adams');
-    expect(wrapper.state('beers')).to.eql(['Sam Adams']);
+    expect(wrapper.state('items')).to.eql(['Sam Adams']);
   });
 
   it('renders the items', () => {
-    const wrapper = mount(<BeerListContainer/>);
+    const wrapper = mount(<ItemListContainer/>);
     wrapper.instance().addItem('Sam Adams');
     wrapper.instance().addItem('Resin');
     expect(wrapper.find('li').length).to.equal(2);
@@ -75,20 +75,20 @@ describe('InputArea', () => {
   });
 });
 
-describe('BeerList', () => {
+describe('ItemList', () => {
   it('should render zero items', () => {
-    const wrapper = shallow(<BeerList items={[]}/>);
+    const wrapper = shallow(<ItemList items={[]}/>);
     expect(wrapper.find('li')).to.have.length(0);
   });
 
   it('should render undefined items', () => {
-    const wrapper = shallow(<BeerList items={undefined}/>);
+    const wrapper = shallow(<ItemList items={undefined}/>);
     expect(wrapper.find('li')).to.have.length(0);
   });
 
   it('should render the items', () => {
     const items = ['Sam Adams', 'Resin', 'Octoberfest'];
-    const wrapper = shallow(<BeerList items={items}/>);
+    const wrapper = shallow(<ItemList items={items}/>);
     expect(wrapper.find('li')).to.have.length(3);
   });
 });

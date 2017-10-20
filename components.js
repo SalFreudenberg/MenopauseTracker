@@ -1,17 +1,50 @@
 import React, { Component } from 'react';
 
-export class BeerListContainer extends Component {
+import BigCalendar from 'react-big-calendar';
+import moment from 'moment';
+
+// Setup the localizer by providing the moment (or globalize) Object
+// to the correct localizer.
+BigCalendar.momentLocalizer(moment); // or globalizeLocalizer
+
+export class MyCalendar extends Component {
+  render() {
+	  //const myEventsList = Array(9).fill("event");
+	  const myDate = new Date();
+	  myDate.setFullYear(2017, 9, 19);
+
+	  const myDate2 = new Date();
+	  myDate2.setFullYear(2017, 9, 21);
+
+	  const myEventsList = [
+		{ title: 'Event 01', allday: true, startDate: myDate, endDate: myDate2 },
+		{ title: 'Event 02', allday: true, startDate: myDate, endDate: myDate2 },
+		{ title: 'Event 03', allday: true, startDate: myDate, endDate: myDate2 } ];
+
+    return (
+		<div>
+			<BigCalendar
+			  events={myEventsList}
+			  startAccessor='startDate'
+			  endAccessor='endDate'
+			/>
+		</div>
+    );
+  }
+}
+
+export class ItemListContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      beers: []
+      items: []
     };
     this.addItem = this.addItem.bind(this);
   }
 
   addItem(name) {
     this.setState({
-      beers: [].concat(this.state.beers).concat([name])
+      items: [].concat(this.state.items).concat([name])
     });
   }
 
@@ -19,7 +52,7 @@ export class BeerListContainer extends Component {
     return (
       <div>
         <InputArea onSubmit={this.addItem}/>
-        <BeerList items={this.state.beers}/>
+        <ItemList items={this.state.items}/>
       </div>
     );
   }
@@ -53,7 +86,7 @@ export class InputArea extends Component {
   }
 }
 
-export class BeerList extends Component {
+export class ItemList extends Component {
   render() {
     return (
       <ul>
@@ -64,4 +97,4 @@ export class BeerList extends Component {
     );
   }
 }
-BeerList.defaultProps = { items: [] };
+ItemList.defaultProps = { items: [] };
