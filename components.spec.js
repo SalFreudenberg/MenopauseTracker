@@ -100,12 +100,10 @@ describe('ItemList', () => {
   });
 });
 
-describe('Calendar', () => {
+// test to create an event which can be populated with a name
+describe('MenopauseCalendar', () => {
   it('should render InputArea and ItemList', () => {
-    const wrapper = shallow(<ItemListContainer/>);
-    expect(wrapper.containsAllMatchingElements([
-      <InputArea/>,
-      <ItemList/>
-    ])).to.equal(true);
+    const wrapper = shallow(<MenopauseCalendar/>);
+    expect(wrapper.)
   });
 });
