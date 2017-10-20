@@ -48,13 +48,17 @@ describe('ItemListContainer', () => {
 });
 
 describe('InputArea', () => {
-  it('should contain an input and a button', () => {
+
+  it('should contain an input', () => {
     const wrapper = shallow(<InputArea/>);
-    expect(wrapper.containsAllMatchingElements([
-      <input/>,
-      <button>Add</button>
-    ])).to.equal(true);
+    expect(wrapper.find('input')).to.have.length(1);
   });
+
+  it('should contain a button', () => {
+    const wrapper = shallow(<InputArea/>);
+    expect(wrapper.find('button')).to.have.length(1);
+  });
+
 
   it('should accept input', () => {
     const wrapper = mount(<InputArea/>);
@@ -81,14 +85,17 @@ describe('ItemList', () => {
     expect(wrapper.find('li')).to.have.length(0);
   });
 
-  it('should render undefined items', () => {
+  it('should not render undefined items', () => {
     const wrapper = shallow(<ItemList items={undefined}/>);
     expect(wrapper.find('li')).to.have.length(0);
   });
 
-  it('should render the items', () => {
+  it('should render multiple items', () => {
     const items = ['Sam Adams', 'Resin', 'Octoberfest'];
     const wrapper = shallow(<ItemList items={items}/>);
     expect(wrapper.find('li')).to.have.length(3);
+    expect(wrapper.contains('Sam Adams')).to.equal(true);
+    expect(wrapper.contains('Resin')).to.equal(true);
+    expect(wrapper.contains('Octoberfest')).to.equal(true);
   });
 });
