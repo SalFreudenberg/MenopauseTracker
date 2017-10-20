@@ -104,8 +104,14 @@ describe('ItemList', () => {
 describe('MenopauseCalendar', () => {
   it('should start with an empty event list', () => {
     const wrapper = shallow(<MenopauseCalendar/>);
+
     expect(wrapper.state('events')).to.have.length(0);
-    //.to.eql([])
+  });
+
+  it('can receive an event just with a name - from anywhere', () => {
+    const wrapper = shallow(<MenopauseCalendar events={[{name: "Chills"}]}/>);
+
+    expect(wrapper.state('events')).to.eql([{name: "Chills"}]);
   });
 
 });
