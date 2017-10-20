@@ -2,8 +2,8 @@ import React from 'react';
 import { expect } from 'chai';
 import { spy } from 'sinon';
 import { shallow, mount } from 'enzyme';
-import { ItemListContainer } from './components';
-import { InputArea, ItemList } from './components';
+import { ItemListContainer } from './src/components';
+import { InputArea, ItemList } from './src/components';
 
 describe('ItemListContainer', () => {
   it('should render InputArea and ItemList', () => {
@@ -97,5 +97,15 @@ describe('ItemList', () => {
     expect(wrapper.contains('Sam Adams')).to.equal(true);
     expect(wrapper.contains('Resin')).to.equal(true);
     expect(wrapper.contains('Octoberfest')).to.equal(true);
+  });
+});
+
+describe('Calendar', () => {
+  it('should render InputArea and ItemList', () => {
+    const wrapper = shallow(<ItemListContainer/>);
+    expect(wrapper.containsAllMatchingElements([
+      <InputArea/>,
+      <ItemList/>
+    ])).to.equal(true);
   });
 });

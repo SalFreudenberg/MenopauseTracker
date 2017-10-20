@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import {ItemListContainer} from './components';
-import {MyCalendar} from './components';
+import {ItemListContainer} from './src/components';
+import {MenopauseCalendar} from './src/components';
 import './node_modules/react-big-calendar/lib/css/react-big-calendar.css';
 
 ReactDOM.render(
-//  <MyCalendar/>,
-  <ItemListContainer/>,
+  <div>
+    <ItemListContainer/>
+    <MenopauseCalendar/>
+  </div>,
   document.querySelector('#root'));
