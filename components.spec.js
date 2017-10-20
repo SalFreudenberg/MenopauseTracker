@@ -4,6 +4,7 @@ import { spy } from 'sinon';
 import { shallow, mount } from 'enzyme';
 import { ItemListContainer } from './src/components';
 import { InputArea, ItemList } from './src/components';
+import { MenopauseCalendar} from './src/menopauseCalendar';
 
 describe('ItemListContainer', () => {
   it('should render InputArea and ItemList', () => {
@@ -100,10 +101,11 @@ describe('ItemList', () => {
   });
 });
 
-// test to create an event which can be populated with a name
 describe('MenopauseCalendar', () => {
-  it('should render InputArea and ItemList', () => {
+  it('should start with an empty event list', () => {
     const wrapper = shallow(<MenopauseCalendar/>);
-    expect(wrapper.)
+    expect(wrapper.state('events')).to.have.length(0);
+    //.to.eql([])
   });
+
 });
