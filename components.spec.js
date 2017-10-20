@@ -108,10 +108,14 @@ describe('MenopauseCalendar', () => {
     expect(wrapper.state('events')).to.have.length(0);
   });
 
-  it('can receive an event just with a name - from anywhere', () => {
-    const wrapper = shallow(<MenopauseCalendar events={[{name: "Chills"}]}/>);
+  it('can receive an event with a name and date of now', () => {
+    const dateNowFinder = {getDate: getDate};
+    const wrapper = shallow(<MenopauseCalendar
+      getDate={() => "2017-10-19"}
+      events={[{name: "Chills"}]}/>);
 
     expect(wrapper.state('events')).to.eql([{name: "Chills"}]);
+    expect(wrapper.state('events')).to.eql([{date: "2017-10-19"}]);
   });
 
 });

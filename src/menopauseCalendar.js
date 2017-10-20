@@ -11,6 +11,9 @@ export class MenopauseCalendar extends Component {
   constructor(props) {
     super(props);
     this.state = {events: props.events ? props.events : []};
+    if (props.events) {
+      this.state.events[0].date = props.getDate();
+    }
   }
 
   render() {
